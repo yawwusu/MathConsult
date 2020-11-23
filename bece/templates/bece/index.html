@@ -1,7 +1,39 @@
 {% extends "bece/layout.html" %}
 
 {% block body %}
-    <h2>Active Year</h2>
+<div id="year-div">
+  <input list="year" id="year-list" name="year-box" placeholder="Choose Year"/>
+
+  <datalist id="year">
+  <option value="2015">
+  <option value="2016">
+  <option value="2017">
+  <option value="2018">
+  <option value="2019">
+  <option value="2020">
+  </datalist>
+</div>
+
+<div id="exam-div">
+  <input list="exam" id="exam-list" name="exam-box" placeholder="Choose Exam Type"/>
+
+  <datalist id="exam">
+  <option value="BECE">
+  <option value="WASSCE">
+  </datalist>
+</div>
+
+<div id="topic-div">
+  <input list="topic" id="topic-list" name="topic-box" placeholder="Choose Topic"/>
+
+  <datalist id="topic">
+  <option value="equations">
+  <option value="sets">
+  <option value="interest">
+  <option value="graphs">
+  <option value="geometry">
+  </datalist>
+</div>
 
     Welcome to the MathConsult Homepage
 {% endblock %}
