@@ -4,12 +4,17 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from .models import Question
+import time
 # Create your views here.
 
 
 
 def index(request):
-    return render(request, "bece/index.html")
+    questions = Question.objects.all()
+    return render(request, "bece/index.html", {
+        "questions": questions
+    })
 
 
 def login_view(request):
@@ -62,3 +67,15 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "bece/register.html")
+
+def fullyear(request):
+    start = int(request.GET.get("start") or 0)
+    end = int(request.GET.get("end") or (start+9))
+    questions = []#Question.objects.all()
+    for i in range(start, end+1):
+        questions.append(f"Question {i}")
+    # time.sleep(1)
+
+    return render(request, "bece/full.html", {
+        "questions": questions
+    })

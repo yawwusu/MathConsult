@@ -2,38 +2,64 @@
 
 {% block body %}
 <div id="year-div">
-  <input list="year" id="year-list" name="year-box" placeholder="Choose Year"/>
-
-  <datalist id="year">
-  <option value="2015">
-  <option value="2016">
-  <option value="2017">
-  <option value="2018">
-  <option value="2019">
-  <option value="2020">
-  </datalist>
+  <!-- <input list="year" id="year-list" name="year-box" placeholder="Choose Year"/> -->
+  <!-- make this place dynamic with django templates -->
+  <select id="year">
+  <option name = 2015 value="2015">2015</option>
+  <option name = 2016 value="2016">2016</option>
+  <option name = 2017 value="2017">2017</option>
+  <option name = 2018 value="2018">2018</option>
+  <option name = 2019 value="2019">2019</option>
+  <option name = 2020 value="2020">2020</option>
+  </select>
 </div>
 
 <div id="exam-div">
-  <input list="exam" id="exam-list" name="exam-box" placeholder="Choose Exam Type"/>
+  <!-- <input list="exam" id="exam-list" name="exam-box" placeholder="Choose Exam Type"/> -->
 
-  <datalist id="exam">
-  <option value="BECE">
-  <option value="WASSCE">
-  </datalist>
+  <select id="exam">
+  <option value="BECE">BECE</option>
+  <option value="WASSCE">WASSCE</option>
+  </select>
 </div>
 
 <div id="topic-div">
-  <input list="topic" id="topic-list" name="topic-box" placeholder="Choose Topic"/>
+  <!-- <input list="topic" id="topic-list" name="topic-box" placeholder="Choose Topic"/> -->
 
-  <datalist id="topic">
-  <option value="equations">
-  <option value="sets">
-  <option value="interest">
-  <option value="graphs">
-  <option value="geometry">
-  </datalist>
+  <select id="topic">
+  <option value="equations">Equations</option>
+  <option value="sets">Sets</option>
+  <option value="interest">Simple Interest</option>
+  <option value="graphs">Graphs</option>
+  <option value="geometry">Geometry</option>
+  </select>
 </div>
 
     Welcome to the MathConsult Homepage
+    <div class = "col-lg-8 border border-success p-4 m-4 mx-auto">
+      {% for question in questions %}
+        <h1>{{ question.question|safe }}</h1>
+        <form>
+            <div class = "radio">
+               <label><input type="radio" name="option_a" value="A">{{ question.option_a }}</label>
+            </div>
+            <div class = "radio">
+               <label><input type="radio" name="option_b" value="B">{{ question.option_b }}</label>
+             </div>
+           <div class = "radio">
+               <label><input type="radio" name="option_c" value="C">{{ question.option_c }}</label>
+             </div>
+           <div class = "radio">
+               <label><input type="radio" name="option_d" value="D">{{ question.option_d }}</label>
+            </div>
+        </form>
+        <div class="form-group">
+            <button class="btn btn-success" id = "save_ans">Submit Answer</button>
+        </div>
+
+      {% empty %}
+        No questions for this year yet.
+      {% endfor %}
+    </div>
+
 {% endblock %}
